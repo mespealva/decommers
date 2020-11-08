@@ -6,15 +6,4 @@ class Category < ApplicationRecord
 
   scope :base_categories, -> { where(category_id: nil) }
 
-  def all_children
-    children.flat_map do |child|
-      child.all_children << child
-    end
-  end
-
-  def all_parents
-    Category.where(id: self.category_id).flat_map do |parent|
-      parent.all_parents << parent
-    end
-  end
 end
